@@ -1,0 +1,5 @@
+### 4 x 12-MHz beams
+beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=0:60 --subbands=220:280 --anadir=0.929337,0.952579,J2000 --digdir=0.929337,0.952579,J2000&
+beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=61:121 --subbands=220:280 --anadir=0.929337,0.952579,J2000 --digdir=0.929337,0.952579,J2000&
+beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=122:182 --subbands=220:280 --anadir=0.929337,0.952579,J2000 --digdir=0.929337,0.952579,J2000&
+beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=183:243 --subbands=220:280 --anadir=0.929337,0.952579,J2000 --digdir=0.929337,0.952579,J2000&

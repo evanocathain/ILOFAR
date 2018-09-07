@@ -1,0 +1,5 @@
+#!/bin/csh
+
+echo "The following beamctl commands are running"
+ps aux | grep beamctl | grep -v grep
+

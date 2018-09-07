@@ -1,0 +1,5 @@
+wget https://www.atnf.csiro.au/people/pulsar/psrcat/downloads/psrcat_pkg.tar.gz
+gunzip psrcat_pkg.tar.gz
+tar xvf psrcat_pkg.tar
+cd psrcat_tar
+source makeit

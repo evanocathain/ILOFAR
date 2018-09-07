@@ -1,0 +1,20 @@
+#!/bin/csh
+
+# Author:      Evan Keane
+# Date:        May 2011
+# Description: This script makes beamctl commands and puts them in a file
+#
+#
+
+set source = $1
+which psrcat
+set source_info = `psrcat -o short -nohead -nonumber -c "raj decj" $source`
+echo $source_info
+set pos_rad = `echo $source_info[1] $source_info[2] | sed s/\\:/" "/g | awk -v pi=3.1415926535 '{printf "%.6f %.6f\n",(($1+(($2+($3/60.0))/60.0))/24.0)*2*pi,(($4+(($5+($6/60.0))/60.0))/360.0)*2*pi}'`
+set ra = $pos_rad[1]
+set dec = $pos_rad[2]
+
+echo "beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=0:60 --subbands=220:280 --anadir=$ra,$dec,J2000 --digdir=$ra,$dec,J2000&" > latest_beamctl_cmds
+echo "beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=61:121 --subbands=281:341 --anadir=$ra,$dec,J2000 --digdir=$ra,$dec,J2000&" >> latest_beamctl_cmds
+echo "beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=122:182 --subbands=342:402 --anadir=$ra,$dec,J2000 --digdir=$ra,$dec,J2000&" >> latest_beamctl_cmds
+echo "beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=183:243 --subbands=403:463 --anadir=$ra,$dec,J2000 --digdir=$ra,$dec,J2000&" >> latest_beamctl_cmds

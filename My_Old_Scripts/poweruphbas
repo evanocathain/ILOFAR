@@ -1,0 +1,23 @@
+#!/bin/csh
+
+echo "Turning on the HBAs with appropriate waits"
+echo "You will have to wait a few seconds"
+ 
+rspctl --rcumode=5 --select=0:31
+rspctl --rcuenable=1 --select=0:31
+sleep 2
+rspctl --rcumode=5 --select=32:63
+rspctl --rcuenable=1 --select=32:63
+sleep 2
+rspctl --rcumode=5 --select=64:95
+rspctl --rcuenable=1 --select=64:95
+sleep 2
+rspctl --rcumode=5 --select=96:127
+rspctl --rcuenable=1 --select=96:127
+sleep 2
+rspctl --rcumode=5 --select=128:159
+rspctl --rcuenable=1 --select=128:159
+sleep 2
+rspctl --rcumode=5 --select=160:191
+rspctl --rcuenable=1 --select=160:191
+sleep 2

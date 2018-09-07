@@ -1,0 +1,4 @@
+beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=0:60 --subbands=220:280 --anadir=5.845988,0.836274,J2000 --digdir=5.845988,0.836274,J2000&
+beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=61:121 --subbands=281:341 --anadir=5.845988,0.836274,J2000 --digdir=5.845988,0.836274,J2000&
+beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=122:182 --subbands=342:402 --anadir=5.845988,0.836274,J2000 --digdir=5.845988,0.836274,J2000&
+beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=183:243 --subbands=403:463 --anadir=5.845988,0.836274,J2000 --digdir=5.845988,0.836274,J2000&

@@ -1,0 +1,22 @@
+#!/bin/csh
+
+# This script makes beamctl commands and puts them in a file
+echo "hello, enter two psr names one after another..."
+set source1 = $1
+set source2 = $2
+set source1_info = `psrcat -o short -nohead -nonumber -c "raj decj" $source1`
+set source2_info = `psrcat -o short -nohead -nonumber -c "raj decj" $source2`
+echo $source1_info
+echo $source2_info
+set pos1_rad = `echo $source1_info[1] $source1_info[2] | sed s/\\:/" "/g | awk -v pi=3.1415926535 '{printf "%.6f %.6f\n",(($1+(($2+($3/60.0))/60.0))/24.0)*2*pi,(($4+(($5+($6/60.0))/60.0))/360.0)*2*pi}'`
+set pos2_rad = `echo $source2_info[1] $source2_info[2] | sed s/\\:/" "/g | awk -v pi=3.1415926535 '{printf "%.6f %.6f\n",(($1+(($2+($3/60.0))/60.0))/24.0)*2*pi,(($4+(($5+($6/60.0))/60.0))/360.0)*2*pi}'`
+
+set ra1 = $pos1_rad[1]
+set dec1 = $pos1_rad[2]
+set ra2 = $pos2_rad[1]
+set dec2 = $pos2_rad[2]
+
+echo "beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=0:60 --subbands=220:280 --anadir=$ra1,$dec1,J2000 --digdir=$ra1,$dec1,J2000&" > latest_beamctl_cmds
+echo "beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=61:121 --subbands=281:341 --anadir=$ra1,$dec1,J2000 --digdir=$ra1,$dec1,J2000&" >> latest_beamctl_cmds
+echo "beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=122:182 --subbands=342:402 --anadir=$ra2,$dec2,J2000 --digdir=$ra2,$dec2,J2000&" >> latest_beamctl_cmds
+echo "beamctl --antennaset=HBA_JOINED --rcus=0:191 --rcumode=5 --beamlets=183:243 --subbands=403:463 --anadir=$ra2,$dec2,J2000 --digdir=$ra2,$dec2,J2000&" >> latest_beamctl_cmds
