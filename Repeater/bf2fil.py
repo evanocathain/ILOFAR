@@ -77,7 +77,7 @@ for packets in range(0,npackets):
                 Yr=f.read(bitmode) # Y-pol, real
                 Yi=f.read(bitmode) # Y-pol, imaginary
                 # Do a simple 16x time scrunch
-                Iave[nbeamlets-incomplete-beamlets] = Iave[nbeamlets-incomplete-beamlets] + (struct.unpack(fmt,Xr)[0])*(struct.unpack(fmt,Xr)[0]) + (struct.unpack(fmt,Xi)[0])*(struct.unpack(fmt,Xi)[0]) + (struct.unpack(fmt,Yr)[0])*(struct.unpack(fmt,Yr)[0]) + (struct.unpack(fmt,Yi)[0])*(struct.unpack(fmt,Yi)[0])
+                Iave[nbeamlets-1-incomplete-beamlets] = Iave[nbeamlets-1-incomplete-beamlets] + (struct.unpack(fmt,Xr)[0])*(struct.unpack(fmt,Xr)[0]) + (struct.unpack(fmt,Xi)[0])*(struct.unpack(fmt,Xi)[0]) + (struct.unpack(fmt,Yr)[0])*(struct.unpack(fmt,Yr)[0]) + (struct.unpack(fmt,Yi)[0])*(struct.unpack(fmt,Yi)[0])
 
         if (acqmode == "evan"):
             f.seek(104,1) # Last beamlet is screwed up for I-LOFAR data, consisting only of 104 bytes
