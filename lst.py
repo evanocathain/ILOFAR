@@ -1,25 +1,19 @@
-#!/Applications/scisoft//i386/bin/python
-
-#
-# Author:  Evan Keane
-# Date:    No idea when I first wrote this exactly (some day in 2008).
-# Purpose: Simple script to get the current LST for a bunch of telescope sites.
-#
+#!/opt/homebrew/opt/python@3.10/bin/python3.10
 
 import sys 
 from datetime import *
 import ephem
 
 if len(sys.argv)<2:
-    print "Usage: lst/mjd [site]"
-    print ' '
-    print "This program returns the current location, LST, UT and MJD for a given site"
-    print "e.g. lst jbo produces"
-    print "Site = Jodrell Bank"
-    print "Long,Lat = -2:18:25.7 53:14:13.2"
-    print "LST = 17:51:18.81"
-    print "UT = 2011/11/10 14:42:53"
-    print "UT (MJD) = 55875.6131134"
+    print("Usage: lst/mjd [site]")
+    print(' ')
+    print("This program returns the current location, LST, UT and MJD for a given site")
+    print("e.g. lst jbo produces")
+    print("Site = Jodrell Bank")
+    print("Long,Lat = -2:18:25.7 53:14:13.2")
+    print("LST = 17:51:18.81")
+    print("UT = 2011/11/10 14:42:53")
+    print("UT (MJD) = 55875.6131134")
     sys.exit(0)
 
 place=sys.argv[1]
@@ -88,16 +82,18 @@ elif (place=="lofar"):
     site.elevation = 0
     place = "LOFAR Superterp"
 else: 
-    print "Which telescope?! Try again!"
+    print("Which telescope?! Try again!")
     sys.exit(0)
 
 site.date=datetime.utcnow()
-print "Site =",place
-print "Long,Lat =",site.long,site.lat
-print "LST =",site.sidereal_time()
-print "UT =",site.date
-print "UT (MJD) =",site.date+15019.5
+print("Site =",place)
+print("Long,Lat =",site.long,site.lat)
+print("LST =",site.sidereal_time())
+print("UT =",site.date)
+print("UT (MJD) =",site.date+15019.5)
 ## NB pyephem records Dublin Julian Day Number not MJD
 ## see Table in en.wikipedia.org/wiki/Julian_day for more info
 
+
 sys.exit(0)
+
