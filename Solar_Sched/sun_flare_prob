@@ -1,0 +1,10 @@
+#NOAA
+wget -q https://services.swpc.noaa.gov/text/3-day-solar-geomag-predictions.txt && grep -A 100 ":Reg_Prob" 3-day-solar-geomag-predictions.txt | awk 'BEGIN{printf "Region\tC prob\tM prob\tX prob\tProton prob\n"}NR>1{printf "1%s\t%d\t%d\t%d\t%d\n",$1,$2,$3,$4,$5;}' > NOAA
+#wget -q https://services.swpc.noaa.gov/text/3-day-solar-geomag-predictions.txt && grep -A 100 ":Reg_Prob" 3-day-solar-geomag-predictions.txt | awk -v val=0 'NR>1{if ($4>=50) val=1}END{print val}'
+
+# MCSTAT
+wget -q https://raw.githubusercontent.com/solarmonitor/solarmonitoridl/master/data/flarehist.txt && wget -q https://services.swpc.noaa.gov/text/srs.txt
+grep -A 100 "Mag Type" srs.txt | grep -v "IA" | grep -v "II" | awk '$8!=""{if (NR>1) print "1"$1,toupper($5)}' > mcintosh_classes
+awk 'NR>1{print "grep "$1" mcintosh_classes"}' NOAA | bash > todays_classes && awk '{print "grep "$2" flarehist.txt"}' todays_classes | bash | awk '{printf "%s %2d %2d %2d\n",$1,100*(1-exp(-$2/$5))+0.5,100*(1-exp(-$3/$5))+0.5,100*(1-exp(-$4/$5))+0.5}' > tmp && paste todays_classes tmp | awk 'BEGIN{printf "Region\tClass\tM Prob\tC Prob\tX Prob\n"}{printf "%s\t%s\t%d\t%d\t%d\n",$1,$2,$4,$5,$6}' > MCSTAT && rm mcintosh_classes todays_classes tmp
+
+cat NOAA MCSTAT
