@@ -4,6 +4,7 @@ IE613_First_Light/pulses.pls
 Repeater/TODO
 Sensitivity/fit.log
 Sensitivity/Tsys*
+Sensitivity/sens.gp
 Solar_Sched/3-day*
 Solar_Sched/srs*
 Solar_Sched/flarehist*
